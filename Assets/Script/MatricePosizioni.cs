@@ -13,16 +13,29 @@ public class MatricePosizioni : MonoBehaviour {
 	void AutoCheck(){
 		GameObject[] autoGameObjects = GameObject.FindGameObjectsWithTag("Obj");
 		foreach(GameObject go in autoGameObjects){
-			int posx = (int)(go.transform.position.x - 0.5f + 10);
-			int posz = (int)(go.transform.position.z - 0.5f + 10);
-			Debug.Log("AutoCheck - Trovato oggetto in pos " + posx + "," + posz);
-			matrice[posx,posz] = go;
+			for(int i=0;i<go.transform.childCount;i++){
+				GameObject children = go.transform.GetChild(i).gameObject;
+				if(children.transform.position.y == 0){
+					int posx = convertiAsseAPos(children.transform.position.x);
+					int posz = convertiAsseAPos(children.transform.position.z);
+					Debug.Log("AutoCheck - Trovato oggetto in pos (" + posx + "," + posz + "), nome: " + children.name);
+					setMatrPos(posx,posz,children);
+				}
+			}
 		}
 	}
 
-	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	private void setMatrPos(int posx, int posz, GameObject go){
+		if(matrice[posx,posz] == null){
+			matrice[posx,posz] = go;
+		}else{
+			Debug.LogError("setMatrPos - La posizione (" + posx + "," + posz + ") e' gia' occupata da " + matrice[posx,posz].name + " e vuole essere sostituita da " + go.name +"," +
+			               " le loro posizioni sono rispettivamente " + matrice[posx,posz].transform.position + " e " + go.transform.position +",correggi");
+		}
 	}
 	/// <summary>
 	/// Controlla se la posizione indicata e' libera o meno.
@@ -42,6 +55,6 @@ public class MatricePosizioni : MonoBehaviour {
 	/// <returns>La posizione nella matrice.</returns>
 	/// <param name="asse">Asse.</param>
 	public static int convertiAsseAPos(float asse){
-		return (int)(asse - 0.5f + 10);
+		return Mathf.RoundToInt(asse - 0.5f + 10);
 	}
 }
