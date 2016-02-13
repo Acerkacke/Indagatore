@@ -26,17 +26,34 @@ public class PlayerScript : MonoBehaviour {
 		}
 		if(timer <= 0 ){
 			if(Input.GetKeyDown(KeyCode.RightArrow)){
-				setTargetPos(new Vector3(targetPos.x+1,targetPos.y,targetPos.z));
+				Spostati(Direzione.Destra);
 			}
 			if(Input.GetKeyDown(KeyCode.LeftArrow)){
-				setTargetPos(new Vector3(targetPos.x-1,targetPos.y,targetPos.z));
+				Spostati(Direzione.Sinistra);
 			}
 			if(Input.GetKeyDown(KeyCode.UpArrow)){
-				setTargetPos(new Vector3(targetPos.x,targetPos.y,targetPos.z+1));
+				Spostati(Direzione.Su);
 			}
 			if(Input.GetKeyDown(KeyCode.DownArrow)){
-				setTargetPos(new Vector3(targetPos.x,targetPos.y,targetPos.z-1));
+				Spostati(Direzione.Giu);
 			}
+		}
+	}
+
+	public void Spostati(Direzione dir){
+		switch(dir){
+		case Direzione.Su:
+			setTargetPos(new Vector3(targetPos.x,targetPos.y,targetPos.z+1));
+			break;
+		case Direzione.Giu:
+			setTargetPos(new Vector3(targetPos.x,targetPos.y,targetPos.z-1));
+			break;
+		case Direzione.Destra:
+			setTargetPos(new Vector3(targetPos.x+1,targetPos.y,targetPos.z));
+			break;
+		case Direzione.Sinistra:
+			setTargetPos(new Vector3(targetPos.x-1,targetPos.y,targetPos.z));
+			break;
 		}
 	}
 
@@ -61,4 +78,11 @@ public class PlayerScript : MonoBehaviour {
 			transform.position = Vector3.Lerp(transform.position,targetPos,tempoSpostamento);
 		}
 	}
+}
+
+public enum Direzione{
+	Su,
+	Giu,
+	Destra,
+	Sinistra
 }

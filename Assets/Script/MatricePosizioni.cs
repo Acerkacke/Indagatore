@@ -15,7 +15,7 @@ public class MatricePosizioni : MonoBehaviour {
 		foreach(GameObject go in autoGameObjects){
 			for(int i=0;i<go.transform.childCount;i++){
 				GameObject children = go.transform.GetChild(i).gameObject;
-				if(children.transform.position.y == 0){
+				if(children.transform.position.y >= -0.5 && children.transform.position.y < 0.5){
 					int posx = convertiAsseAPos(children.transform.position.x);
 					int posz = convertiAsseAPos(children.transform.position.z);
 					//Debug.Log("AutoCheck - Trovato oggetto in pos (" + posx + "," + posz + "), nome: " + children.name);
