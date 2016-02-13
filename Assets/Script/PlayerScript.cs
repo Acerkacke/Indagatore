@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlayerScript : MonoBehaviour {
 
 	private float ogniQuantoSposta = 0.20f;
-	private float tempoSpostamento = 0.05f;
+	private float tempoSpostamento = 0.1f;
 	private float timer = 0;
 	private Vector3 targetPos;
 	private List<Vector3> lastPos;
@@ -58,8 +58,7 @@ public class PlayerScript : MonoBehaviour {
 
 	void Trasla(){
 		if(transform.position != targetPos){
-			Vector3 velocity = Vector3.zero;
-			transform.position = Vector3.SmoothDamp(transform.position,targetPos,ref velocity,tempoSpostamento);
+			transform.position = Vector3.Lerp(transform.position,targetPos,tempoSpostamento);
 		}
 	}
 }

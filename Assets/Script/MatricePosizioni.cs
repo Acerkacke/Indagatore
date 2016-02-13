@@ -18,7 +18,7 @@ public class MatricePosizioni : MonoBehaviour {
 				if(children.transform.position.y == 0){
 					int posx = convertiAsseAPos(children.transform.position.x);
 					int posz = convertiAsseAPos(children.transform.position.z);
-					Debug.Log("AutoCheck - Trovato oggetto in pos (" + posx + "," + posz + "), nome: " + children.name);
+					//Debug.Log("AutoCheck - Trovato oggetto in pos (" + posx + "," + posz + "), nome: " + children.name);
 					setMatrPos(posx,posz,children);
 				}
 			}
