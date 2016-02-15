@@ -10,23 +10,20 @@ public class MatricePosizioni : MonoBehaviour {
 		AutoCheck();
 	}
 
-	void AutoCheck(){
+	private void AutoCheck(){
 		GameObject[] autoGameObjects = GameObject.FindGameObjectsWithTag("Obj");
 		foreach(GameObject go in autoGameObjects){
 			for(int i=0;i<go.transform.childCount;i++){
 				GameObject children = go.transform.GetChild(i).gameObject;
 				if(children.transform.position.y >= -0.5 && children.transform.position.y < 0.5){
-					int posx = convertiAsseAPos(children.transform.position.x);
-					int posz = convertiAsseAPos(children.transform.position.z);
-					//Debug.Log("AutoCheck - Trovato oggetto in pos (" + posx + "," + posz + "), nome: " + children.name);
-					setMatrPos(posx,posz,children);
+					Vector2? pos = convertiAssiAPosRelativo(children.transform.position);
+					if(pos.HasValue){
+						Debug.Log("AutoCheck - Trovato oggetto in pos (" + pos.Value.x + "," + pos.Value.y + "), nome: " + children.name);
+						setMatrPos((int)pos.Value.x,(int)pos.Value.y,children);
+					}
 				}
 			}
 		}
-	}
-
-	void Update () {
-	
 	}
 
 	private void setMatrPos(int posx, int posz, GameObject go){
@@ -43,10 +40,36 @@ public class MatricePosizioni : MonoBehaviour {
 	/// <returns><c>true</c>, se libero, <c>false</c> se occupato da qualcosa.</returns>
 	/// <param name="posx">posx</param>
 	/// <param name="posy">posy</param>
-	public bool eLibero(int posx, int posy){
-		if(matrice[posx,posy] != null)
-			return false;
-		return true;
+	public bool eLibero(Vector2? posizione){
+		int posx = (int)posizione.Value.x;
+		int posy = (int)posizione.Value.y;
+		if(posizione.HasValue){
+			if(matrice[posx,posy] != null){
+				//se e' un iteratore
+				if(matrice[posx,posy].transform.root.GetComponent<Iteratore>()){
+					matrice[posx,posy].transform.root.GetComponent<Iteratore>().Attiva();
+					return true;
+				}else{
+					//se e' solo un blocco
+					return false;
+				}
+			}
+			return true;
+		}else{
+			return passaAVicino(posizione);
+		}
+	}
+
+	private bool passaAVicino(Vector2? posizione){
+		foreach(MatricePosizioni mp in GameObject.FindObjectsOfType<MatricePosizioni>()){
+			if(!mp.gameObject.Equals(gameObject)){
+				if(mp.convertiAssiAPosRelativo(posizione.Value).HasValue){
+					GameObject.FindObjectOfType<PlayerScript>().matricePos = mp;
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/// <summary>
@@ -54,7 +77,26 @@ public class MatricePosizioni : MonoBehaviour {
 	/// </summary>
 	/// <returns>La posizione nella matrice.</returns>
 	/// <param name="asse">Asse.</param>
-	public static int convertiAsseAPos(float asse){
-		return Mathf.RoundToInt(asse - 0.5f + 10);
+	/*public static Vector2 convertiAssiAPos(Vector3 assi){
+		return new Vector2(Mathf.RoundToInt(assi.x - 0.5f + 10),Mathf.RoundToInt(assi.z - 0.5f + 10));
+	}*/
+
+	public Vector2? convertiAssiAPosRelativo(Vector3 assi){
+		Vector2? risultato = new Vector2?(new Vector2(Mathf.RoundToInt(assi.x - 0.5f + transform.position.x),Mathf.RoundToInt(assi.z - 0.5f + transform.position.z)));
+		if((risultato.Value.x < 0 || risultato.Value.x >= 20) || (risultato.Value.y < 0 || risultato.Value.y >= 20)){
+			return new Vector2?();
+		}else{
+			return risultato;
+		}
+	}
+
+	public Vector2? convertiAssiAPosRelativo(Vector2 assi){
+		Vector2? risultato = new Vector2?(new Vector2(Mathf.RoundToInt(assi.x - 0.5f + transform.position.x),Mathf.RoundToInt(assi.y - 0.5f + transform.position.z )));
+		if((risultato.Value.x < 0 || risultato.Value.x >= 20) || (risultato.Value.y < 0 || risultato.Value.y >= 20)){
+			return new Vector2?();
+		}else{
+			return risultato;
+		}
 	}
 }
+

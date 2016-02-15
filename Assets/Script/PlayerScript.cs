@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour {
 	private float timer = 0;
 	private Vector3 targetPos;
 	private List<Vector3> lastPos;
-	private MatricePosizioni matricePos;
+	public MatricePosizioni matricePos;
 
 	void Start () {
 		targetPos = transform.position;
@@ -68,9 +68,8 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	bool canIGoThere(Vector3 pos){
-		int posx = MatricePosizioni.convertiAsseAPos(pos.x);
-		int posz = MatricePosizioni.convertiAsseAPos(pos.z);
-		return matricePos.eLibero(posx,posz);
+		Vector2? posizione = matricePos.convertiAssiAPosRelativo(pos);
+		return matricePos.eLibero(posizione);
 	}
 
 	void Trasla(){
