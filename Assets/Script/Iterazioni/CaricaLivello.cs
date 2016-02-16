@@ -13,8 +13,13 @@ public class CaricaLivello : Iterazione{
 	public override void Azione(){
 		if(livello >= 0){
 			fp.StartFade();
-			Debug.Log("Completato fade");
-			Application.LoadLevel(livello);
+			StartCoroutine(Carica(2));
 		}
+	}
+
+	IEnumerator Carica(float quanto) {
+		yield return new WaitForSeconds(quanto);
+
+        Application.LoadLevel(livello);
 	}
 }

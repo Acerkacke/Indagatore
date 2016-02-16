@@ -5,35 +5,38 @@ using System.Threading;
 
 public class FadePanel : MonoBehaviour {
 
-	bool hasToFade = false;
-	float currFade;
+	private bool hasToFade;
+	private float currFade;
 	Image panel;
-	public float maxWaitTime = 105;
+	public float secondi = 1;
+	private float deltaAlpha;
 
 	void Start () {
-		currFade = 0f;
+		hasToFade = false;
 		panel = GetComponent<Image>();
+		currFade = panel.color.a;
+		deltaAlpha = (1f/40)/secondi;
 	}
 
 	void Update () {
 		if(hasToFade){
-			if(currFade > 0f){
+			if(currFade < 1f){
 				Fade();
 			}
 		}else{
-			if(currFade < 1f){
+			if(currFade > 0f){
 				UnFade();
 			}
 		}
 	}
 
 	private void Fade(){
-		currFade+=0.05f;
+		currFade+=deltaAlpha;
 		panel.color = new Color(0,0,0,currFade);
 	}
 
 	private void UnFade(){
-		currFade-=0.05f;
+		currFade-=deltaAlpha;
 		panel.color = new Color(0,0,0,currFade);
 	}
 
