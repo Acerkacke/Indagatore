@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour {
 	void Start () {
 		targetPos = transform.position;
 		lastPos = new List<Vector3>();
-		matricePos = GameObject.FindObjectOfType<MatricePosizioni>();
+		matricePos = GameObject.FindObjectOfType<MatricePosizioni>().trovaMatrice(transform.position);
 	}
 
 
@@ -69,7 +69,18 @@ public class PlayerScript : MonoBehaviour {
 
 	bool canIGoThere(Vector3 pos){
 		Vector2? posizione = matricePos.convertiAssiAPosRelativo(pos);
-		return matricePos.eLibero(posizione);
+		if(posizione.HasValue){
+			return matricePos.eLibero(posizione.Value);
+		}else{
+			MatricePosizioni matr = matricePos.trovaMatrice(pos);
+			if(matr != null){
+				matricePos = matr;
+				Vector2? posizio = matricePos.convertiAssiAPosRelativo(pos);
+				return matr.eLibero(posizio.Value);
+			}else{
+				return false;
+			}
+		}
 	}
 
 	void Trasla(){
