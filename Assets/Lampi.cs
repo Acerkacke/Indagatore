@@ -13,6 +13,9 @@ public class Lampi : MonoBehaviour {
     public float variazione = 0.1f;
     public List<AudioClip> audios = new List<AudioClip>();
     private AudioSource audioSource;
+	public float maxIntensita;
+	private float maxIntensitaLocal;
+	private bool haTuonato;
 
 	void Start () {
         hasToLamp = false;
@@ -25,7 +28,13 @@ public class Lampi : MonoBehaviour {
     {
         hasToLamp = true;
         isGoUp = true;
+		randomMaxIntensita ();
+		haTuonato = false;
     }
+
+	private void randomMaxIntensita(){
+		maxIntensitaLocal = Random.Range (0,maxIntensita+0.10f);
+	}
 	
 	void Update () {
 
@@ -55,10 +64,12 @@ public class Lampi : MonoBehaviour {
             intensita += variazione;
             //variazione += 0.05f;
             Assegna();
-            if(intensita >= 1)
+			if(intensita >= maxIntensitaLocal)
             {
-                audioSource.clip = audios[Random.Range(0, audios.Count)];
-                audioSource.Play();
+				if(!haTuonato){
+	                audioSource.clip = audios[Random.Range(0, audios.Count)];
+	                audioSource.Play();
+				}
                 isGoUp = false;
             }
         }
@@ -67,11 +78,12 @@ public class Lampi : MonoBehaviour {
             //variazione -= 0.05f;
             intensita -= variazione;
             Assegna();
-            if (intensita >= 0.5)
+            if (intensita >= 0.4)
             {
-                if (Random.Range(0, 100) >= 70)
+                if (Random.Range(0, 100) >= 80)
                 {
                     isGoUp = true;
+					randomMaxIntensita();
                 }
             }
             if(intensita <= 0.05)
