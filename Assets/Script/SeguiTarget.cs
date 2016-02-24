@@ -8,6 +8,10 @@ public class SeguiTarget : MonoBehaviour {
 	private float tempoAttuale;
 	void Start(){
 		tempoAttuale = 0.01f;
+        if(target == null)
+        {
+            target = GameObject.FindObjectOfType<PlayerScript>().transform;
+        }
 	}
 
 	void Update () {

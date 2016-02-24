@@ -4,6 +4,7 @@ using System.Collections;
 public class SetFrameRate : MonoBehaviour {
 	public int frameRate = 30;
 	void Awake() {
-		Application.targetFrameRate = frameRate;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = frameRate;
 	}
 }

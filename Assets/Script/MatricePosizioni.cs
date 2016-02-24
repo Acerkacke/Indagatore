@@ -96,7 +96,11 @@ public class MatricePosizioni : MonoBehaviour {
 			return risultato;
 		}
 	}
-
+    /// <summary>
+    /// Converte un Vector2 a asse di gioco
+    /// </summary>
+    /// <param name="assi"></param>
+    /// <returns></returns>
 	public Vector2? convertiAssiAPosRelativo(Vector2 assi){
 		Vector2? risultato = new Vector2?(new Vector2(Mathf.RoundToInt(assi.x - 0.5f - transform.position.x + 10),Mathf.RoundToInt(assi.y - 0.5f - transform.position.z + 10)));
 		if((risultato.Value.x < 0 || risultato.Value.x >= 20) || (risultato.Value.y < 0 || risultato.Value.y >= 20)){
@@ -105,5 +109,19 @@ public class MatricePosizioni : MonoBehaviour {
 			return risultato;
 		}
 	}
+    /// <summary>
+    /// Converte un Vector3 a asse di gioco
+    /// </summary>
+    /// <param name="assi"></param>
+    /// <returns></returns>
+    public static Vector2? convertiAssiAPosAssoluto(Vector3 assi)
+    {
+        return new Vector2?(new Vector2(Mathf.RoundToInt(assi.x - 0.5f), Mathf.RoundToInt(assi.z - 0.5f)));
+    }
+
+    public static Vector2? convertiAssiAPosAssoluto(Vector2 assi)
+    {
+        return new Vector2?(new Vector2(Mathf.RoundToInt(assi.x - 0.5f), Mathf.RoundToInt(assi.y - 0.5f )));
+    }
 }
 

@@ -16,6 +16,9 @@ public class Lampi : MonoBehaviour {
 	public float maxIntensita;
 	private float maxIntensitaLocal;
 	private bool haTuonato;
+    public bool puoLampare;
+    private float nextLampo;
+    public float tempoTraLampi;
 
 	void Start () {
         hasToLamp = false;
@@ -33,29 +36,52 @@ public class Lampi : MonoBehaviour {
     }
 
 	private void randomMaxIntensita(){
-		maxIntensitaLocal = Random.Range (0,maxIntensita+0.10f);
+		maxIntensitaLocal = Random.Range (0.5f,maxIntensita+0.10f);
 	}
 	
 	void Update () {
 
+        if (!puoLampare)
+        {
+            if(Time.time > nextLampo)
+            {
+                puoLampare = true;
+            }
+        }
+
         if (lampaDaSolo)
         {
-            if(Random.Range(0,500) == 275)
+            if (puoLampare)
             {
-                Lampa();
+                if (!hasToLamp)
+                {
+                    if (Random.Range(0, 500) == 275)
+                    {
+                        Lampa();
+                    }
+                }
             }
         }
 
         if (lampa)
         {
-            Lampa();
-            lampa = false;
+            if (puoLampare)
+            {
+                Lampa();
+                lampa = false;
+            }
         }
         if (hasToLamp)
         {
             Lampeggia();
         }
 	}
+
+    void calcolaNuovoLampo()
+    {
+        puoLampare = false;
+        nextLampo = Time.time + tempoTraLampi;
+    }
 
     void Lampeggia()
     {
@@ -69,7 +95,9 @@ public class Lampi : MonoBehaviour {
 				if(!haTuonato){
 	                audioSource.clip = audios[Random.Range(0, audios.Count)];
 	                audioSource.Play();
-				}
+                    haTuonato = true;
+                }
+                calcolaNuovoLampo();
                 isGoUp = false;
             }
         }
