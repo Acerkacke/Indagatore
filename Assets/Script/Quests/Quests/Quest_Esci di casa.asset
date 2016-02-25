@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e9376eed896dd48acc14b11243e4b0, type: 3}
+  m_Name: Quest_Esci di casa
+  m_EditorClassIdentifier: 
+  titolo: Esci di casa
+  descrizione: E' la tua prima missione, abbastanza semplice no? Devi uscire di casa,
+    trovare la porta ti dovrebbe essere facile
+  obiettivi:
+  - {fileID: 11400000, guid: f957639d7b3839c4aae6b3293e6e3f5c, type: 2}
+  completata: 0

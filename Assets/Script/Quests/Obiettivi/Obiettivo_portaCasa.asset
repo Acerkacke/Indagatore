@@ -8,11 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76e9376eed896dd48acc14b11243e4b0, type: 3}
-  m_Name: Quest_Esci
+  m_Script: {fileID: 11500000, guid: 6114d38522ef0094980e2a4b535abf49, type: 3}
+  m_Name: Obiettivo_portaCasa
   m_EditorClassIdentifier: 
-  titolo: Esci
-  descrizione: esci di casa ancora
-  obiettivi:
-  - {fileID: 11400000, guid: ac49ec7c9e15ed944995ff106a564069, type: 2}
-  completata: 0
+  completato: 0
+  condizione: portaCasa
