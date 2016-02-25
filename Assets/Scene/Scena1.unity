@@ -10984,8 +10984,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests:
-  - {fileID: 11400000, guid: d32391fd472439e4696a1ae84f0b8e9d, type: 2}
-  - {fileID: 11400000, guid: 898af2f8fea007649b7d634fc6b875ef, type: 2}
+  - {fileID: 11400000, guid: 86ea79412bfb9f041993153d104ab05f, type: 2}
+  copyQuests: []
 --- !u!4 &1140912456
 Transform:
   m_ObjectHideFlags: 0

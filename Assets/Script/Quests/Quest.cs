@@ -4,10 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-[System.Serializable]
 public class Quest : ScriptableObject,ICloneable
 {
-
     public string titolo;
 	public string descrizione;
 	public Obiettivo[] obiettivi;
@@ -62,21 +60,21 @@ public class Quest : ScriptableObject,ICloneable
     }
     public bool completaObiettivo(string condizione)
     {
-        Debug.Log("Beh io ho " + obiettivi.Length + " obiettivi");
+        //Debug.Log("Beh io ho " + obiettivi.Length + " obiettivi");
         for (int i = 0; i < obiettivi.Length; i++)
         {
             if (obiettivi[i].Completa(condizione))
             {
-                Debug.Log("Hai completato l'obiettivo " + obiettivi[i].getCondizione());
+                //Debug.Log("Hai completato l'obiettivo " + obiettivi[i].getCondizione());
                 if(getUncompletedObiettivi().Length <= 0)
                 {
-                    Debug.Log("Hai anche completato tutta la quest!");
+                    //Debug.Log("Hai anche completato tutta la quest!");
                     completata = true;
                     return true;
                 }
                 else
                 {
-                    Debug.Log("Ti mancano " + getUncompletedObiettivi().Length + " obiettivi");
+                    //Debug.Log("Ti mancano " + getUncompletedObiettivi().Length + " obiettivi");
                     return false;
                 }
             }
@@ -107,11 +105,21 @@ public class Quest : ScriptableObject,ICloneable
         return q;
     }
 	public object Clone(){
-		Obiettivo[] oviettivi = new Obiettivo[](obiettivi);
-		Quest q =  new  Quest(titolo,descrizione,oviettivi);
+        Obiettivo[] oviettivi = ClonaObiettivi(obiettivi);
+		Quest q =  new Quest(titolo,descrizione,oviettivi);
 		q.name = name + "Clone";
 		return q;
 	}
+
+    private Obiettivo[] ClonaObiettivi(Obiettivo[] obi)
+    {
+       List<Obiettivo> obiets = new List<Obiettivo>();
+        for(int i = 0; i < obi.Length; i++)
+        {
+            obiets.Add(new Obiettivo(obi[i]));
+        }
+        return obiets.ToArray();
+    }
 }
 
 [CustomEditor(typeof(Quest))]

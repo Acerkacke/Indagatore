@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections;
 
 
-[System.Serializable]
+
 public class Obiettivo : ScriptableObject{
 
     public bool completato;
@@ -24,6 +24,11 @@ public class Obiettivo : ScriptableObject{
         {
             return;
         }
+    }
+    public Obiettivo(Obiettivo o)
+    {
+        this.completato = o.completato;
+        this.condizione = o.condizione;
     }
     public bool Completa(string condizioni)
     {

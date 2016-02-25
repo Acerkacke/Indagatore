@@ -16,7 +16,7 @@ public class AttivaQuest : Iterazione {
     {
         if(qm != null)
         {
-            Debug.Log("ciao");
+            //Debug.Log("Potresti aver fatto una quest");
             qm.Completa(condizione);
         }
     }

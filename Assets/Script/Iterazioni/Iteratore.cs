@@ -7,7 +7,7 @@ public class Iteratore : MonoBehaviour {
 	public List<Iterazione> iterazioni = new List<Iterazione>();
 
 	public void Attiva(){
-		Debug.Log("Attivato");
+		//Debug.Log("Attivato");
 		foreach(Iterazione iter in iterazioni){
 			iter.Azione();
 		}
