@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 [System.Serializable]
-public class Quest : ScriptableObject
+public class Quest : ScriptableObject,ICloneable
 {
 
-    protected string titolo;
-    protected string descrizione;
-    protected Obiettivo[] obiettivi;
-    protected bool completata;
+    public string titolo;
+	public string descrizione;
+	public Obiettivo[] obiettivi;
+	public bool completata;
 
     public Quest(string titolo,string descrizione,Obiettivo[] obiettivi)
     {
@@ -104,4 +106,30 @@ public class Quest : ScriptableObject
         q.obiettivi = obiettivi;
         return q;
     }
+	public object Clone(){
+		Obiettivo[] oviettivi = new Obiettivo[](obiettivi);
+		Quest q =  new  Quest(titolo,descrizione,oviettivi);
+		q.name = name + "Clone";
+		return q;
+	}
+}
+
+[CustomEditor(typeof(Quest))]
+public class CustomInspectorQuest : Editor{
+	
+	public string sel;
+
+	public override void OnInspectorGUI ()
+	{
+		Quest q = ((Quest)target);
+		q.titolo = EditorGUILayout.TextField ("Titolo",q.titolo);
+		q.descrizione = EditorGUILayout.TextField ("Descrizione",q.descrizione);
+		EditorGUILayout.LabelField ("_______________________________________________________________________________________________________________");
+		EditorGUILayout.LabelField ("Obiettivi");
+		for (int i=0; i<q.obiettivi.Length; i++) {
+			Obiettivo o = q.obiettivi[i];
+			o.condizione = EditorGUILayout.TextField ((i+1) + " Condizione",o.condizione);
+			o.completato = EditorGUILayout.Toggle ("Completato",o.completato);
+		}
+	}
 }

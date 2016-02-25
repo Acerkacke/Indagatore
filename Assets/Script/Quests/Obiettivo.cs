@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 
 [System.Serializable]
 public class Obiettivo : ScriptableObject{
 
-    protected bool completato;
-    protected string condizione;
+    public bool completato;
+	public string condizione;
 
 	public Obiettivo()
     {
@@ -56,4 +57,18 @@ public class Obiettivo : ScriptableObject{
         o.condizione = condizione;
         return o;
     }
+}
+
+[CustomEditor(typeof(Obiettivo))]
+public class CustomInspectorObiettivo : Editor{
+
+	public string sel;
+
+
+
+	public override void OnInspectorGUI ()
+	{
+		((Obiettivo)target).condizione = EditorGUILayout.TextField ("Condizione",((Obiettivo)target).condizione);
+		((Obiettivo)target).completato = EditorGUILayout.Toggle ("Completato",((Obiettivo)target).completato);
+	}
 }
