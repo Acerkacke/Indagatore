@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Dialogo : MonoBehaviour {
+public class Dialogo : ScriptableObject {
 
-	// Use this for initialization
-	void Start () {
+    public string[] frasi;
+    public float tempoScrittura = -1;
+
+    public Dialogo CreateInstance(string[] frasi)
+    {
+        Dialogo d = ScriptableObject.CreateInstance<Dialogo>();
+        d.frasi = frasi;
+        return d;
+    }
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
