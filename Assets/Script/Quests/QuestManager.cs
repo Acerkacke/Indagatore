@@ -23,7 +23,10 @@ public class QuestManager : MonoBehaviour {
 
 	private void copiaQuests(){
 		for (int i=0; i<quests.Count; i++) {
-			copyQuests.Add((Quest)quests[i].Clone());
+            if (quests[i] != null)
+            {
+                copyQuests.Add((Quest)quests[i].Clone());
+            }
 		}
 	}
 

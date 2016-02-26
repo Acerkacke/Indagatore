@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obj
   - Blocco
+  - Scatta
   layers:
   - Default
   - TransparentFX

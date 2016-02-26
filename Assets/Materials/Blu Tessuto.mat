@@ -97,15 +97,15 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Shininess
-        second: .078125
+        second: 0.078125
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -113,7 +113,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -141,7 +141,7 @@ Material:
       data:
         first:
           name: _TranslucencyViewDependency
-        second: .699999988
+        second: 0.7
       data:
         first:
           name: _ShadowStrength
@@ -158,15 +158,15 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .049470149, g: .118273489, b: .448529422, a: 1}
+        second: {r: 0.04947015, g: 0.11827349, b: 0.44852942, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 1}
+        second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       data:
         first:
           name: _TranslucencyColor
-        second: {r: .730000019, g: .850000024, b: .409999996, a: 1}
+        second: {r: 0.73, g: 0.85, b: 0.41, a: 1}
       data:
         first:
           name: _TreeInstanceColor

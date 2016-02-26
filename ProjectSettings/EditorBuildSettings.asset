@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scene/Scena1.unity
   - enabled: 1
     path: Assets/Scene/Scena2.unity
+  - enabled: 1
+    path: Assets/Scene/Scena3.unity

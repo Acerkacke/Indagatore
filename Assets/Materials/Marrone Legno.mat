@@ -105,11 +105,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Shininess
-        second: .100000001
+        second: 0.1
       data:
         first:
           name: _WindQuality
@@ -121,7 +121,7 @@ Material:
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -129,7 +129,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .100000001
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -153,7 +153,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: .00999999978
+        second: 0.01
       data:
         first:
           name: _Cull
@@ -161,7 +161,7 @@ Material:
       data:
         first:
           name: _TranslucencyViewDependency
-        second: .699999988
+        second: 0.7
       data:
         first:
           name: _ShadowStrength
@@ -171,6 +171,18 @@ Material:
           name: _SquashAmount
         second: 1
     m_Colors:
+      data:
+        first:
+          name: _EmissionColor
+        second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _Color
+        second: {r: 0.29411763, g: 0.10917552, b: 0.025951562, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
       data:
         first:
           name: _TreeInfo0
@@ -337,24 +349,12 @@ Material:
         second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
-          name: _EmissionColor
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _Color
-        second: {r: .29411763, g: .109175518, b: .0259515624, a: 1}
-      data:
-        first:
-          name: _SpecColor
-        second: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-      data:
-        first:
           name: _HueVariation
-        second: {r: 1, g: .5, b: 0, a: .100000001}
+        second: {r: 1, g: 0.5, b: 0, a: 0.1}
       data:
         first:
           name: _TranslucencyColor
-        second: {r: .730000019, g: .850000024, b: .409999996, a: 1}
+        second: {r: 0.73, g: 0.85, b: 0.41, a: 1}
       data:
         first:
           name: _TreeInstanceColor
